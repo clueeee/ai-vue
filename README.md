@@ -1,5 +1,98 @@
-# Vue 3 + Vite
+# AI-Vue
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+一个面向心理健康领域的AI智能咨询平台，采用前后端分离架构开发，包含用户端与管理端两套界面，聚焦于咨询、情感日志与知识文章管理场景。
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## 项目简介
+
+本项目提供了两类核心使用场景：
+
+- **用户端（前台）**：
+  - 首页展示
+  - AI 咨询
+  - 情感日记记录
+  - 知识文章浏览与详情查看
+- **管理端（后台）**：
+  - 数据分析仪表盘
+  - 知识文章管理
+  - 咨询记录管理
+  - 情感日志管理
+
+并包含完整的登录/注册流程与基于用户类型的路由权限控制。
+
+## 技术栈
+
+- **框架**：Vue 3
+- **构建工具**：Vite
+- **路由**：Vue Router 4
+- **状态管理**：Pinia
+- **UI 组件库**：Element Plus
+- **图表**：ECharts
+- **HTTP 请求**：Axios
+- **富文本编辑器**：wangEditor
+- **样式**：Sass
+
+## 目录结构（主要）
+
+```text
+ai-vue/
+├─ src/
+│  ├─ api/               # 接口封装
+│  ├─ components/        # 公共组件
+│  ├─ config/            # 配置项
+│  ├─ router/            # 路由配置与守卫
+│  ├─ stores/            # Pinia 状态管理
+│  ├─ utils/             # 工具函数（如请求封装）
+│  ├─ views/             # 页面视图（前台/后台/认证）
+│  ├─ App.vue
+│  └─ main.js
+├─ package.json
+└─ README.md
+```
+
+## 路由与权限说明
+
+- 未登录用户：
+  - 访问后台路由（`/back/**`）会被重定向到登录页（`/auth/login`）。
+- 已登录用户：
+  - `userType === 2`（管理端账号）可访问后台路由。
+  - `userType === 1`（普通用户）仅可访问前台路由，访问后台或认证路由会被重定向到首页。
+
+## 快速开始
+
+### 1. 安装依赖
+
+```bash
+npm install
+```
+
+### 2. 启动开发环境
+
+```bash
+npm run dev
+```
+
+### 3. 构建生产包
+
+```bash
+npm run build
+```
+
+### 4. 本地预览生产构建
+
+```bash
+npm run preview
+```
+
+## 环境与接口配置
+
+当前项目中存在文件资源基础地址配置：
+
+- `src/config/index.js` 中的 `fileBaseUrl`
+
+请根据你的后端环境（开发/测试/生产）修改为对应地址，建议后续迁移为 `.env` 方式管理。
+
+## 开发建议
+
+- 为 `src/api` 下接口按业务模块继续拆分，统一错误处理。
+- 使用环境变量管理 API Base URL 与静态资源地址。
+- 为关键业务（登录、路由守卫、文章详情）补充单元测试与集成测试。
